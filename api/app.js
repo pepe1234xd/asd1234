@@ -4,7 +4,7 @@ const session = require('express-session');
 //creacion de aplicacion 
 const app = express()
 //parte de loacion de la la app
-const port = 9001;
+const port = 9005;
 //middlewares
 app.use(express.json())
 //obtener metodo 
@@ -37,8 +37,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
-app.get('/', (req, res) => {
-    req.session.times = req.session.times ? ++req.session.time:1;
-    req.setHeader('content-type','text/html');
-    res.send("the user has entered: " + req.session.times + "3 times")
+app.get('/contador', (req, res) => {
+    req.session.visita = req.session.visita ? ++req.session.visita: 1;  
+    res.send("the user has entered: " + req.session.visita + "times")
 })
